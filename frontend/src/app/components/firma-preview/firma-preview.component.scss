@@ -1,30 +1,108 @@
-.preview-container {
+.firma-form-container {
   margin: 20px 0;
-  padding: 20px;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
 }
 
-.preview-title {
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  padding: 15px 20px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.form-group {
   margin-bottom: 20px;
-  font-size: 18px;
-  font-weight: 600;
-  color: #333;
 }
 
-#firma-preview {
-  min-height: 200px;
-  border: 1px dashed #ccc;
-  padding: 20px;
-  background: #f9f9f9;
+label {
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.required {
+  color: #dc3545;
+}
+
+.form-control {
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  padding: 10px 12px;
+  height: auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form-control:focus {
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  outline: none;
+}
+
+.form-actions {
+  margin-top: 30px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  padding: 10px 20px;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+
+.invalid-feedback {
+  display: block;
+  color: #dc3545;
+  margin-top: 5px;
+}
+
+.is-invalid {
+  border-color: #dc3545;
+}
+
+.is-invalid:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.alert {
+  padding: 12px 15px;
+  border-radius: 4px;
+}
+
+.row {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #666;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
 }
 
-.firma-container {
-  font-family: Arial, sans-serif;
-  max-width: 500px;
+.col-md-6 {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+@media (min-width: 768px) {
+  .col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
 }
