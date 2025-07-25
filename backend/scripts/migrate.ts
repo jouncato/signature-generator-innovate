@@ -1,11 +1,13 @@
-const { Pool } = require('pg');
-require('dotenv').config();
+import { Pool } from 'pg';
+import { config } from 'dotenv';
+
+config();
 
 const pool = new Pool({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
+  port: parseInt(process.env.DB_PORT || '5432'),
   database: process.env.DB_NAME
 });
 
@@ -23,14 +25,16 @@ const createTablesQuery = `
   );
 `;
 
-async function migrate() {
+async function migrate(): Promise<void> {
   try {
     console.log('Iniciando migración de base de datos...');
     await pool.query(createTablesQuery);
     console.log('Migración completada exitosamente');
+    await pool.end();
     process.exit(0);
   } catch (error) {
     console.error('Error en la migración:', error);
+    await pool.end();
     process.exit(1);
   }
 }

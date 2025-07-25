@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "description": "Backend para generador de firmas digitales",
   "main": "dist/app.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node dist/app.js",
-    "dev": "nodemon src/app.ts",
+    "dev": "nodemon",
     "build": "tsc",
     "lint": "eslint src/**/*.ts",
     "format": "prettier --write \"src/**/*.ts\"",
-    "db:migrate": "npm run build && node dist/scripts/migrate.js",
+    "db:migrate": "ts-node scripts/migrate.ts",
     "test": "jest"
   },
   "dependencies": {
@@ -20,7 +21,7 @@
     "helmet": "^7.1.0",
     "morgan": "^1.10.0",
     "pg": "^8.11.3",
-    "puppeteer": "^24.15.0"
+    "puppeteer": "^21.6.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.14",
