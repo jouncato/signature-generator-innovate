@@ -1,0 +1,145 @@
+<div class="firma-form-container">
+  <div class="card">
+    <div class="card-header">
+      <h2>Datos de la Firma</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="firmaForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="nombre">Nombre <span class="required">*</span></label>
+              <input
+                type="text"
+                id="nombre"
+                class="form-control"
+                formControlName="nombre"
+                [class.is-invalid]="submitted && f['nombre'].errors"
+              >
+              <div *ngIf="submitted && f['nombre'].errors" class="invalid-feedback">
+                <div *ngIf="f['nombre'].errors['required']">El nombre es requerido</div>
+                <div *ngIf="f['nombre'].errors['maxlength']">El nombre no puede exceder 50 caracteres</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="apellido">Apellido <span class="required">*</span></label>
+              <input
+                type="text"
+                id="apellido"
+                class="form-control"
+                formControlName="apellido"
+                [class.is-invalid]="submitted && f['apellido'].errors"
+              >
+              <div *ngIf="submitted && f['apellido'].errors" class="invalid-feedback">
+                <div *ngIf="f['apellido'].errors['required']">El apellido es requerido</div>
+                <div *ngIf="f['apellido'].errors['maxlength']">El apellido no puede exceder 50 caracteres</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="cargo">Cargo <span class="required">*</span></label>
+              <input
+                type="text"
+                id="cargo"
+                class="form-control"
+                formControlName="cargo"
+                [class.is-invalid]="submitted && f['cargo'].errors"
+              >
+              <div *ngIf="submitted && f['cargo'].errors" class="invalid-feedback">
+                <div *ngIf="f['cargo'].errors['required']">El cargo es requerido</div>
+                <div *ngIf="f['cargo'].errors['maxlength']">El cargo no puede exceder 100 caracteres</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="departamento">Departamento <span class="required">*</span></label>
+              <input
+                type="text"
+                id="departamento"
+                class="form-control"
+                formControlName="departamento"
+                [class.is-invalid]="submitted && f['departamento'].errors"
+              >
+              <div *ngIf="submitted && f['departamento'].errors" class="invalid-feedback">
+                <div *ngIf="f['departamento'].errors['required']">El departamento es requerido</div>
+                <div *ngIf="f['departamento'].errors['maxlength']">El departamento no puede exceder 100 caracteres</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <input
+                type="text"
+                id="telefono"
+                class="form-control"
+                formControlName="telefono"
+                [class.is-invalid]="submitted && f['telefono'].errors"
+              >
+              <div *ngIf="submitted && f['telefono'].errors" class="invalid-feedback">
+                <div *ngIf="f['telefono'].errors['pattern']">Formato de teléfono inválido</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="celular">Celular</label>
+              <input
+                type="text"
+                id="celular"
+                class="form-control"
+                formControlName="celular"
+                [class.is-invalid]="submitted && f['celular'].errors"
+              >
+              <div *ngIf="submitted && f['celular'].errors" class="invalid-feedback">
+                <div *ngIf="f['celular'].errors['pattern']">Formato de celular inválido</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email <span class="required">*</span></label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            formControlName="email"
+            [class.is-invalid]="submitted && f['email'].errors"
+          >
+          <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+            <div *ngIf="f['email'].errors['required']">El email es requerido</div>
+            <div *ngIf="f['email'].errors['email']">Formato de email inválido</div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" [disabled]="loading">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+            {{ loading ? 'Guardando...' : 'Generar Firma' }}
+          </button>
+        </div>
+
+        <div *ngIf="error" class="alert alert-danger mt-3">
+          {{ error }}
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <app-firma-preview></app-firma-preview>
+  <app-firma-download></app-firma-download>
+</div>

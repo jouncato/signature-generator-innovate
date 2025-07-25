@@ -1,9 +1,9 @@
-
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { config } from 'dotenv';
+import path from 'path';
 import routes from './routes';
 import { errorHandler } from './utils/error-handler';
 
@@ -19,10 +19,13 @@ app.use(cors({
     ? process.env.ALLOWED_ORIGINS?.split(',') 
     : '*'
 }));
-app.use(helmet()); // Seguridad HTTP
+app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
+
+// Servir archivos estáticos (imágenes)
+app.use('/assets', express.static(path.join(__dirname, '../assets')));
 
 // Rutas API
 app.use('/api', routes);
@@ -36,30 +39,3 @@ app.listen(PORT, () => {
 });
 
 export default app;
-
-// src/config/db.config.ts
-import { Pool, PoolConfig } from 'pg';
-
-const isProduction = process.env.NODE_ENV === 'production';
-
-const poolConfig: PoolConfig = {
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  host: process.env.DB_HOST,
-  port: parseInt(process.env.DB_PORT || '5432'),
-  database: process.env.DB_NAME,
-  max: 20, // Máximo de conexiones en el pool
-  idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000,
-  ssl: isProduction ? { rejectUnauthorized: false } : false
-};
-
-const pool = new Pool(poolConfig);
-
-// Evento para monitorear errores de conexión
-pool.on('error', (err) => {
-  console.error('Error inesperado en el cliente PostgreSQL', err);
-  process.exit(-1);
-});
-
-export default pool;
