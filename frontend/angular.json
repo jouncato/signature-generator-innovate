@@ -103,5 +103,22 @@
   },
   "cli": {
     "analytics": "05a685cf-0a35-49c9-9f25-793b1e054b81"
+  },
+
+
+  "projects": {
+    "firma-digital-frontend": {
+      "architect": {
+        "build": {
+          "options": {
+            "allowedCommonJsDependencies": [
+              "file-saver",
+              "html2canvas"
+            ]
+          }
+        }
+      }
+    }
   }
 }
+
