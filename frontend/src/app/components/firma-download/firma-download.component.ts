@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FirmaService } from '../../services/firma.service';
 
 @Component({
   selector: 'app-firma-download',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './firma-download.component.html',
   styleUrls: ['./firma-download.component.scss']
 })
@@ -24,7 +27,6 @@ export class FirmaDownloadComponent {
         return;
       }
       
-      // Descargar imagen generada localmente
       this.firmaService.downloadImage('firma-preview')
         .then(() => {
           this.downloading = false;
@@ -53,7 +55,6 @@ export class FirmaDownloadComponent {
     }
     
     try {
-      // Descargar imagen generada en el servidor
       this.firmaService.generateAndDownloadImage(firma);
       this.downloading = false;
     } catch (error) {

@@ -7,7 +7,8 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "standalone": true
         }
       },
       "root": "",
@@ -15,16 +16,20 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "dist/firma-digital",
             "index": "src/index.html",
-            "main": "src/main.ts",
+            "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "allowedCommonJsDependencies": [
+              "file-saver",
+              "html2canvas"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -51,12 +56,9 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -103,22 +105,5 @@
   },
   "cli": {
     "analytics": "05a685cf-0a35-49c9-9f25-793b1e054b81"
-  },
-
-
-  "projects": {
-    "firma-digital-frontend": {
-      "architect": {
-        "build": {
-          "options": {
-            "allowedCommonJsDependencies": [
-              "file-saver",
-              "html2canvas"
-            ]
-          }
-        }
-      }
-    }
   }
 }
-

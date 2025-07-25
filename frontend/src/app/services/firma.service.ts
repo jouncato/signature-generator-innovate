@@ -26,7 +26,6 @@ export class FirmaService {
     return this.apiService.saveFirma(firma);
   }
 
-  // FIX: Corregir Promise con reject definido correctamente
   generateImageLocally(elementId: string): Promise<Blob> {
     const element = document.getElementById(elementId);
     if (!element) {
@@ -39,7 +38,7 @@ export class FirmaService {
       allowTaint: true,
       backgroundColor: '#ffffff'
     }).then(canvas => {
-      return new Promise<Blob>((resolve, reject) => { // FIX: reject ahora está definido
+      return new Promise<Blob>((resolve, reject) => {
         canvas.toBlob(blob => {
           if (blob) {
             resolve(blob);
@@ -62,10 +61,13 @@ export class FirmaService {
   }
 
   generateAndDownloadImage(firma: Firma, fileName: string = 'firma-innovate.png'): void {
-    this.apiService.generateImage(firma).subscribe(blob => {
-      saveAs(blob, fileName);
-    }, error => {
-      console.error('Error al generar la imagen en el servidor:', error);
+    this.apiService.generateImage(firma).subscribe({
+      next: (blob) => {
+        saveAs(blob, fileName);
+      },
+      error: (error) => {
+        console.error('Error al generar la imagen en el servidor:', error);
+      }
     });
   }
 }

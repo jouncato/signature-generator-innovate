@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FirmaService } from '../../services/firma.service';
 import { Firma } from '../../models/firma.model';
+import { FirmaPreviewComponent } from '../firma-preview/firma-preview.component';
+import { FirmaDownloadComponent } from '../firma-download/firma-download.component';
 
 @Component({
   selector: 'app-firma-form',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, FirmaPreviewComponent, FirmaDownloadComponent],
   templateUrl: './firma-form.component.html',
   styleUrls: ['./firma-form.component.scss']
 })
@@ -22,7 +27,6 @@ export class FirmaFormComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
     
-    // Actualizar la vista previa en tiempo real con cada cambio
     this.firmaForm.valueChanges.subscribe(formValue => {
       this.firmaService.updateFirma(formValue);
     });
@@ -50,22 +54,20 @@ export class FirmaFormComponent implements OnInit {
     this.loading = true;
     const firma: Firma = this.firmaForm.value;
     
-    this.firmaService.saveFirma(firma).subscribe(
-      response => {
+    this.firmaService.saveFirma(firma).subscribe({
+      next: (response) => {
         this.loading = false;
         this.error = '';
-        // Propagar el ID generado en el servidor
         this.firmaForm.patchValue({ id: response.id });
         this.firmaService.updateFirma(this.firmaForm.value);
       },
-      error => {
+      error: (error) => {
         this.loading = false;
         this.error = 'Error al guardar la firma. Por favor, intente de nuevo.';
         console.error('Error al guardar firma:', error);
       }
-    );
+    });
   }
 
-  // Métodos getter para acceso fácil a los campos del formulario
   get f() { return this.firmaForm.controls; }
 }
