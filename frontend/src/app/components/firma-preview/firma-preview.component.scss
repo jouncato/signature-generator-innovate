@@ -1,0 +1,36 @@
+<style>
+.preview-container {
+  margin: 30px 0;
+}
+
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  padding: 15px 20px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.firma-preview {
+  background-color: #fff;
+  border: 1px solid #e9ecef;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.empty-preview {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6c757d;
+  font-style: italic;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+</style>
