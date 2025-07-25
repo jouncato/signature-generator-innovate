@@ -9,7 +9,7 @@
     "build": "tsc",
     "lint": "eslint src/**/*.ts",
     "format": "prettier --write \"src/**/*.ts\"",
-    "db:migrate": "node dist/scripts/migrate.js",
+    "db:migrate": "npm run build && node dist/scripts/migrate.js",
     "test": "jest"
   },
   "dependencies": {
