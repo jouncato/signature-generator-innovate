@@ -5,13 +5,9 @@
     </div>
     <div class="card-body">
       <div class="download-options">
-        <button class="btn btn-primary me-2" (click)="downloadImage()" [disabled]="downloading">
+        <button class="btn btn-primary" (click)="downloadImage()" [disabled]="downloading">
           <span *ngIf="downloading" class="spinner-border spinner-border-sm me-1"></span>
-          Descargar Imagen (Cliente)
-        </button>
-        <button class="btn btn-secondary" (click)="downloadImageFromServer()" [disabled]="downloading">
-          <span *ngIf="downloading" class="spinner-border spinner-border-sm me-1"></span>
-          Descargar Imagen (Servidor)
+          Descargar Firma
         </button>
       </div>
       <div *ngIf="error" class="alert alert-danger mt-3">

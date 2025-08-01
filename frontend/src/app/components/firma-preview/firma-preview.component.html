@@ -8,7 +8,7 @@
         <table cellpadding="0" cellspacing="0" border="0" style="font-family: Arial, sans-serif; color: #333333;">
           <tr>
             <td style="padding-right: 15px; vertical-align: top;">
-              <img src="assets/images/logo-innovate.png" alt="Innovate Nutrition Logo" width="120" height="auto">
+              <img [src]="assetsUrl + '/images/logo-innovate.png'" alt="Innovate Nutrition Logo" width="120" height="auto">
             </td>
             <td style="border-left: 2px solid #1a8b9d; padding-left: 15px;">
               <table cellpadding="0" cellspacing="0" border="0">
@@ -32,7 +32,7 @@
                     <table cellpadding="0" cellspacing="0" border="0">
                       <tr *ngIf="firma.telefono">
                         <td style="padding-right: 5px; vertical-align: top;">
-                          <img src="assets/images/icon-phone.png" alt="Teléfono" width="14" height="14">
+                          <img [src]="assetsUrl + '/images/icon-phone.png'" alt="Teléfono" width="14" height="14">
                         </td>
                         <td style="font-size: 12px; color: #666666;">
                           {{ firma.telefono }}
@@ -40,7 +40,7 @@
                       </tr>
                       <tr *ngIf="firma.celular">
                         <td style="padding-right: 5px; padding-top: 3px; vertical-align: top;">
-                          <img src="assets/images/icon-mobile.png" alt="Celular" width="14" height="14">
+                          <img [src]="assetsUrl + '/images/icon-mobile.png'" alt="Celular" width="14" height="14">
                         </td>
                         <td style="font-size: 12px; color: #666666; padding-top: 3px;">
                           {{ firma.celular }}
@@ -48,7 +48,7 @@
                       </tr>
                       <tr>
                         <td style="padding-right: 5px; padding-top: 3px; vertical-align: top;">
-                          <img src="assets/images/icon-email.png" alt="Email" width="14" height="14">
+                          <img [src]="assetsUrl + '/images/icon-email.png'" alt="Email" width="14" height="14">
                         </td>
                         <td style="font-size: 12px; color: #666666; padding-top: 3px;">
                           {{ firma.email }}
@@ -56,7 +56,7 @@
                       </tr>
                       <tr>
                         <td style="padding-right: 5px; padding-top: 3px; vertical-align: top;">
-                          <img src="assets/images/icon-web.png" alt="Web" width="14" height="14">
+                          <img [src]="assetsUrl + '/images/icon-web.png'" alt="Web" width="14" height="14">
                         </td>
                         <td style="font-size: 12px; color: #666666; padding-top: 3px;">
                           www.innovatenutrition.com
@@ -68,13 +68,13 @@
                 <tr>
                   <td style="padding-top: 10px;">
                     <a href="https://facebook.com/innovatenutrition" target="_blank">
-                      <img src="assets/images/icon-facebook.png" alt="Facebook" width="20" height="20" style="margin-right: 5px;">
+                      <img [src]="assetsUrl + '/images/icon-facebook.png'" alt="Facebook" width="20" height="20" style="margin-right: 5px;">
                     </a>
                     <a href="https://instagram.com/innovatenutrition" target="_blank">
-                      <img src="assets/images/icon-instagram.png" alt="Instagram" width="20" height="20" style="margin-right: 5px;">
+                      <img [src]="assetsUrl + '/images/icon-instagram.png'" alt="Instagram" width="20" height="20" style="margin-right: 5px;">
                     </a>
                     <a href="https://linkedin.com/company/innovatenutrition" target="_blank">
-                      <img src="assets/images/icon-linkedin.png" alt="LinkedIn" width="20" height="20">
+                      <img [src]="assetsUrl + '/images/icon-linkedin.png'" alt="LinkedIn" width="20" height="20">
                     </a>
                   </td>
                 </tr>

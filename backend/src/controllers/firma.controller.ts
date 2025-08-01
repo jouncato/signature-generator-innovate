@@ -44,7 +44,7 @@ export class FirmaController {
   /**
    * Obtiene todas las firmas
    */
-  static async getFirmas(req: Request, res: Response, next: NextFunction): Promise<void> {
+  static async getFirmas(_req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const result = await DbService.query('SELECT * FROM firmas ORDER BY created_at DESC');
       res.json(result.rows);

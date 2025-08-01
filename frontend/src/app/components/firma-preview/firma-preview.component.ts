@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FirmaService } from '../../services/firma.service';
 import { Firma } from '../../models/firma.model';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-firma-preview',
@@ -12,6 +13,7 @@ import { Firma } from '../../models/firma.model';
 })
 export class FirmaPreviewComponent implements OnInit {
   firma: Firma | null = null;
+  assetsUrl = environment.assetsUrl;
 
   constructor(private firmaService: FirmaService) { }
 

@@ -61,7 +61,7 @@ export class ImageService {
         omitBackground: false
       });
       
-      return imageBuffer;
+      return Buffer.from(imageBuffer);
     } finally {
       await browser.close();
     }
