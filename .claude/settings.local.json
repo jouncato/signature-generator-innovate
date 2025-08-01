@@ -6,7 +6,11 @@
       "Bash(cp:*)",
       "Bash(mv:*)",
       "Bash(rmdir:*)",
-      "Bash(npm start)"
+      "Bash(npm start)",
+      "Bash(mkdir:*)",
+      "Bash(rm:*)",
+      "Bash(ng build)",
+      "Bash(find:*)"
     ],
     "deny": []
   }

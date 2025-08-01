@@ -1,80 +1,22 @@
-# docker-compose.yml (principal)
 version: '3.8'
 
 services:
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    container_name: firma-digital-backend
-    restart: always
-    environment:
-      - NODE_ENV=${NODE_ENV:-production}
-      - PORT=${PORT:-3000}
-      - DB_HOST=${DB_HOST:-host.docker.internal}
-      - DB_PORT=${DB_PORT:-5432}
-      - DB_NAME=${DB_NAME:-firma_digital}
-      - DB_USER=${DB_USER:-postgres}
-      - DB_PASSWORD=${DB_PASSWORD:-secretpassword}
-      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-http://localhost}
-      - LOGO_URL=http://localhost:3000/assets/images/logo-innovate.png
-      - PHONE_ICON_URL=http://localhost:3000/assets/images/icon-phone.png
-      - MOBILE_ICON_URL=http://localhost:3000/assets/images/icon-mobile.png
-      - EMAIL_ICON_URL=http://localhost:3000/assets/images/icon-email.png
-      - WEB_ICON_URL=http://localhost:3000/assets/images/icon-web.png
-      - FACEBOOK_ICON_URL=http://localhost:3000/assets/images/icon-facebook.png
-      - INSTAGRAM_ICON_URL=http://localhost:3000/assets/images/icon-instagram.png
-      - LINKEDIN_ICON_URL=http://localhost:3000/assets/images/icon-linkedin.png
-    ports:
-      - "${PORT:-3000}:3000"
-    volumes:
-      - ./backend/assets:/app/assets
-    networks:
-      - app-network
-    depends_on:
-      - postgres-check
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:3000/api/firmas || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
-  frontend:
+  signature-generator:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: firma-digital-frontend
-    restart: always
-    depends_on:
-      - backend
+    container_name: signature-generator-app
     ports:
-      - "80:80"
+      - "8080:80"
+    restart: unless-stopped
     networks:
-      - app-network
+      - signature-network
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
 
-  # Servicio para verificar que PostgreSQL esté disponible
-  postgres-check:
-    image: postgres:17.5-alpine3.22
-    container_name: postgres-check
-    command: >
-      sh -c "
-        until pg_isready -h ${DB_HOST:-host.docker.internal} -p ${DB_PORT:-5432} -U ${DB_USER:-postgres}; do
-          echo 'Esperando PostgreSQL...'
-          sleep 2
-        done
-        echo 'PostgreSQL está listo!'
-      "
-    environment:
-      - PGPASSWORD=${DB_PASSWORD:-secretpassword}
-    networks:
-      - app-network
-    depends_on: []
-
 networks:
-  app-network:
+  signature-network:
     driver: bridge

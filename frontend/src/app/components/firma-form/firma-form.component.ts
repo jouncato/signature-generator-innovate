@@ -54,19 +54,15 @@ export class FirmaFormComponent implements OnInit {
     this.loading = true;
     const firma: Firma = this.firmaForm.value;
     
-    this.firmaService.saveFirma(firma).subscribe({
-      next: (response) => {
-        this.loading = false;
-        this.error = '';
-        this.firmaForm.patchValue({ id: response.id });
-        this.firmaService.updateFirma(this.firmaForm.value);
-      },
-      error: (error) => {
-        this.loading = false;
-        this.error = 'Error al guardar la firma. Por favor, intente de nuevo.';
-        console.error('Error al guardar firma:', error);
-      }
-    });
+    try {
+      this.firmaService.updateFirma(firma);
+      this.loading = false;
+      this.error = '';
+    } catch (error) {
+      this.loading = false;
+      this.error = 'Error al procesar la firma. Por favor, intente de nuevo.';
+      console.error('Error al procesar firma:', error);
+    }
   }
 
   get f() { return this.firmaForm.controls; }

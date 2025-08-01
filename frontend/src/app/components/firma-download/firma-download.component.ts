@@ -43,24 +43,4 @@ export class FirmaDownloadComponent {
     }
   }
 
-  downloadImageFromServer(): void {
-    this.downloading = true;
-    this.error = '';
-    
-    const firma = this.firmaService.getCurrentFirma();
-    if (!firma) {
-      this.error = 'No hay datos de firma para descargar';
-      this.downloading = false;
-      return;
-    }
-    
-    try {
-      this.firmaService.generateAndDownloadImage(firma);
-      this.downloading = false;
-    } catch (error) {
-      this.error = 'Error al descargar la imagen';
-      this.downloading = false;
-      console.error('Error en descarga del servidor:', error);
-    }
-  }
 }

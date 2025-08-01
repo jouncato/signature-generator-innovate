@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Firma } from '../models/firma.model';
-import { ApiService } from './api.service';
 import { saveAs } from 'file-saver';
 import html2canvas from 'html2canvas';
 
@@ -12,7 +11,7 @@ export class FirmaService {
   private firmaSubject = new BehaviorSubject<Firma | null>(null);
   public firma$ = this.firmaSubject.asObservable();
 
-  constructor(private apiService: ApiService) { }
+  constructor() { }
 
   updateFirma(firma: Firma): void {
     this.firmaSubject.next(firma);
@@ -20,10 +19,6 @@ export class FirmaService {
 
   getCurrentFirma(): Firma | null {
     return this.firmaSubject.getValue();
-  }
-
-  saveFirma(firma: Firma): Observable<Firma> {
-    return this.apiService.saveFirma(firma);
   }
 
   generateImageLocally(elementId: string): Promise<Blob> {
@@ -60,14 +55,4 @@ export class FirmaService {
     }
   }
 
-  generateAndDownloadImage(firma: Firma, fileName: string = 'firma-innovate.png'): void {
-    this.apiService.generateImage(firma).subscribe({
-      next: (blob) => {
-        saveAs(blob, fileName);
-      },
-      error: (error) => {
-        console.error('Error al generar la imagen en el servidor:', error);
-      }
-    });
-  }
 }

@@ -1,205 +1,206 @@
-# Generador de Firmas Digitales
+# Generador de Firmas Digitales - Innovate Nutrition
 
-Este proyecto replica la funcionalidad del sitio innovatenutrition.com/firmasweb/firmainnovate.html, permitiendo a los usuarios crear, visualizar y descargar firmas digitales personalizadas para correos electrónicos.
+Aplicación web frontend para crear y descargar firmas digitales personalizadas de Innovate Nutrition.
 
 ## Tecnologías Utilizadas
 
-### Frontend
-- Angular 16+
-- TypeScript
-- HTML5/CSS3/SCSS
-- html2canvas para conversión a imágenes en el cliente
-- Reactive Forms con validación
-
-### Backend
-- Node.js con Express
-- TypeScript
-- PostgreSQL 17
-- Puppeteer para renderización HTML a imagen
-- Handlebars para plantillas
+- **Angular 18+** - Framework frontend
+- **TypeScript** - Lenguaje de programación
+- **HTML5/CSS3/SCSS** - Maquetación y estilos
+- **html2canvas** - Conversión de HTML a imagen
+- **file-saver** - Descarga de archivos
+- **Reactive Forms** - Formularios con validación
 
 ## Estructura del Proyecto
 
 ```
-firma-digital/
-├── frontend/                # Aplicación Angular
-├── backend/                 # Servidor Node.js
-└── docker-compose.yml       # Configuración Docker
+signature-generator-innovate/
+├── frontend/                # Aplicación Angular (único componente)
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── components/
+│   │   │   ├── models/
+│   │   │   └── services/
+│   │   └── assets/
+│   │       └── images/      # Logos e iconos
+│   ├── Dockerfile
+│   └── nginx.conf
+├── docker-compose.yml       # Configuración Docker
+└── README.md
 ```
+
+## Características
+
+- ✅ **100% Frontend** - Sin backend ni base de datos, todo funciona en el navegador
+- 🎨 **Vista previa en tiempo real** - Actualización automática al escribir
+- 📱 **Responsive** - Compatible con móviles y tablets  
+- 🖼️ **Descarga como imagen** - PNG de alta calidad
+- 📧 **Disclaimer incluido** - Texto legal al final de la firma
+- 🐳 **Dockerizado** - Listo para desplegar
+- 💾 **Sin persistencia** - Los datos no se guardan, solo se procesan en memoria
 
 ## Requisitos Previos
 
 - Node.js 18+
 - npm 9+
-- Angular CLI 16+
-- PostgreSQL 17 (o Docker)
-- Git
+- Angular CLI 18+ (opcional)
+- Docker (para contenedor)
 
 ## Instalación y Configuración
 
-### Clonar el Repositorio
+### Opción 1: Desarrollo Local
 
 ```bash
-git clone https://github.com/tuusuario/firma-digital.git
-cd firma-digital
-```
+# Clonar repositorio
+git clone <repository-url>
+cd signature-generator-innovate/frontend
 
-### Backend
-
-1. Configurar variables de entorno:
-
-```bash
-cd backend
-cp .env.example .env
-```
-
-2. Editar el archivo `.env` con tus configuraciones específicas.
-
-3. Instalar dependencias:
-
-```bash
+# Instalar dependencias
 npm install
-```
 
-4. Compilar TypeScript:
-
-```bash
-npm run build
-```
-
-5. Ejecutar migración de base de datos:
-
-```bash
-npm run db:migrate
-```
-
-6. Iniciar el servidor:
-
-```bash
-npm run dev
-```
-
-El servidor estará disponible en `http://localhost:3000`.
-
-### Frontend
-
-1. Configurar entorno:
-
-```bash
-cd frontend
-```
-
-2. Instalar dependencias:
-
-```bash
-npm install
-```
-
-3. Ejecutar servidor de desarrollo:
-
-```bash
+# Ejecutar servidor de desarrollo
 ng serve
 ```
 
 La aplicación estará disponible en `http://localhost:4200`.
 
-## Uso con Docker
-
-Para facilitar el despliegue, puedes utilizar Docker Compose:
+### Opción 2: Docker (Recomendado)
 
 ```bash
-# Copiar el archivo de variables de entorno
-cp backend/.env.example .env
+# Clonar repositorio
+git clone <repository-url>
+cd signature-generator-innovate
 
-# Editar las variables según tu configuración
-nano .env
-
-# Iniciar servicios
+# Construir y ejecutar contenedor
 docker-compose up -d
 ```
 
-Esto iniciará tres contenedores:
-- PostgreSQL (puerto 5432)
-- Backend Node.js (puerto 3000)
-- Frontend Angular (puerto 80)
+La aplicación estará disponible en `http://localhost:8080`.
+
+### Opción 3: Build de Producción
+
+```bash
+cd frontend
+
+# Build de producción
+npm run build
+
+# Servir archivos estáticos (ejemplo con http-server)
+npx http-server dist/firma-digital -p 8080
+```
 
 ## Uso de la Aplicación
 
-1. Acceder a la aplicación web (http://localhost:4200 en desarrollo o http://localhost en Docker).
-2. Completar el formulario con los datos personales.
-3. Ver la vista previa de la firma generada en tiempo real.
-4. Descargar la firma como imagen usando una de las opciones disponibles.
-5. Añadir la imagen a tu cliente de correo electrónico (Gmail, Outlook, etc.).
+1. **Acceder** a la aplicación web
+   - Desarrollo: `http://localhost:4200`
+   - Docker: `http://localhost:8080`
 
-## API Endpoints
+2. **Completar formulario** con datos personales:
+   - Nombre y apellido (requeridos)
+   - Cargo y departamento (requeridos)
+   - Teléfono y celular (opcionales)
+   - Email (requerido)
 
-El backend expone los siguientes endpoints:
+3. **Vista previa** se actualiza automáticamente mientras escribes
 
-- `POST /api/firmas`: Guarda una nueva firma en la base de datos
-- `GET /api/firmas`: Obtiene todas las firmas guardadas
-- `POST /api/firmas/render-html`: Genera el HTML de la firma
-- `POST /api/firmas/generate-image`: Genera una imagen PNG de la firma
+4. **Descargar firma** como PNG de alta calidad haciendo clic en "Descargar Firma"
 
-## Variables de Entorno
+5. **Usar en email**:
+   - Añadir la imagen descargada a tu cliente de correo
+   - Compatible con Gmail, Outlook, Apple Mail, etc.
 
-### Backend (.env)
+## Arquitectura
 
-| Variable | Descripción | Valor por defecto |
-|----------|-------------|-------------------|
-| PORT | Puerto del servidor | 3000 |
-| NODE_ENV | Entorno de ejecución | development |
-| ALLOWED_ORIGINS | Orígenes permitidos para CORS | http://localhost:4200 |
-| DB_HOST | Host de PostgreSQL | localhost |
-| DB_PORT | Puerto de PostgreSQL | 5432 |
-| DB_NAME | Nombre de la base de datos | firma_digital |
-| DB_USER | Usuario de PostgreSQL | postgres |
-| DB_PASSWORD | Contraseña de PostgreSQL | secretpassword |
+```
+┌─────────────────┐    ┌──────────────────┐    ┌────────────────┐
+│   Formulario    │───▶│  Vista Previa    │───▶│   Descarga     │
+│  (Reactive)     │    │  (Tiempo Real)   │    │  (html2canvas) │
+└─────────────────┘    └──────────────────┘    └────────────────┘
+        │                       │                       │
+        ▼                       ▼                       ▼
+   FirmaService           HTML Template            PNG Image
+   (BehaviorSubject)      (Styled Table)          (file-saver)
+```
 
-## Seguridad
+**Flujo de datos:**
+1. Usuario escribe en formulario
+2. Datos se envían a `FirmaService` (en memoria)
+3. Vista previa se actualiza automáticamente
+4. Usuario descarga imagen generada del DOM
+5. **No hay persistencia** - los datos se pierden al recargar
 
-El proyecto implementa varias medidas de seguridad:
+## Componentes Principales
 
-1. **Validación de datos**:
-   - Validación de formularios en el frontend
-   - Validación de entrada en el backend
-   - Sanitización de entrada para prevenir inyección SQL
+- **`FirmaFormComponent`** - Formulario con validaciones
+- **`FirmaPreviewComponent`** - Vista previa de la firma
+- **`FirmaDownloadComponent`** - Descarga de imagen
+- **`FirmaService`** - Gestión de estado en memoria (BehaviorSubject)
+- **`Firma`** - Modelo de datos (sin ID ni timestamps de BD)
 
-2. **Seguridad HTTP**:
-   - Uso de Helmet para establecer cabeceras de seguridad
-   - Configuración de CORS para limitar orígenes
+## Personalización
 
-3. **Base de datos**:
-   - Uso de parámetros de consulta para prevenir inyección SQL
-   - Conexión SSL en producción
-   - Pool de conexiones con límites
+### Cambiar Logo
+Reemplazar archivo en `src/assets/images/logo-innovate.png`
 
-4. **Otras medidas**:
-   - Control de errores para evitar exposición de información sensible
-   - Registro (logging) de actividad
-   - Validación de tipos con TypeScript
+### Modificar Colores
+Editar variables en `firma-preview.component.html`:
+```html
+style="color: #1a8b9d;"           <!-- Color principal -->
+style="border-left: 2px solid #1a8b9d;"  <!-- Borde -->
+```
 
-## Extensibilidad
+### Añadir Campos
+1. Actualizar `firma.model.ts`
+2. Agregar controles en `firma-form.component.ts`
+3. Modificar HTML en `firma-preview.component.html`
 
-El proyecto ha sido diseñado para ser fácilmente extensible:
+## Despliegue en Producción
 
-1. **Nuevos tipos de firma**:
-   - Crear nuevas plantillas Handlebars en `backend/src/templates/`
-   - Añadir nuevos componentes Angular en `frontend/src/app/components/`
+### Nginx
+```bash
+# Build
+npm run build
 
-2. **Autenticación**:
-   - Implementar JWT o OAuth añadiendo middlewares y controladores
+# Copiar archivos
+cp -r dist/firma-digital/* /var/www/html/
+```
 
-3. **Almacenamiento en la nube**:
-   - Añadir servicios para almacenar imágenes en AWS S3, Google Cloud Storage, etc.
+### Vercel/Netlify
+```bash
+# Build command
+npm run build
 
-## Contribución
+# Output directory
+dist/firma-digital
+```
 
-1. Haz fork del repositorio
-2. Crea una rama para tu funcionalidad (`git checkout -b feature/amazing-feature`)
-3. Haz commit de tus cambios (`git commit -m 'Add some amazing feature'`)
-4. Haz push a la rama (`git push origin feature/amazing-feature`)
-5. Abre un Pull Request
+### Docker
+```bash
+docker-compose up -d
+```
+
+## Troubleshooting
+
+### Problemas Comunes
+
+**Error: "Cannot find module"**
+```bash
+rm -rf node_modules package-lock.json
+npm install
+```
+
+**Imágenes no se cargan**
+- Verificar que las imágenes estén en `src/assets/images/`
+- Limpiar caché del navegador (Ctrl+Shift+R)
+
+**Error en descarga**
+- Verificar que html2canvas esté instalado
+- Comprobar permisos de descarga del navegador
+
+### Logs y Debug
+
+En desarrollo, abrir DevTools (F12) para ver errores en consola.
 
 ## Licencia
 
-Este proyecto está licenciado bajo la Licencia MIT - ver el archivo LICENSE para más detalles.
+MIT License - Libre para uso comercial y personal.

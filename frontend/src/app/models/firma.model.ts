@@ -1,5 +1,4 @@
 export interface Firma {
-  id?: number;
   nombre: string;
   apellido: string;
   cargo: string;
@@ -7,5 +6,4 @@ export interface Firma {
   telefono?: string;
   celular?: string;
   email: string;
-  created_at?: Date;
 }
