@@ -1,0 +1,304 @@
+/* Estilos base según especificaciones */
+body {
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #33479c;
+    padding-bottom: 20px;
+}
+
+.logo {
+    max-width: 120px;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+header h1 {
+    color: #33479c;
+    font-size: 24pt;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Navegación entre pantallas */
+.screen {
+    display: none;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Formularios */
+.form-container {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.form-container h2 {
+    color: #33479c;
+    font-size: 18pt;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #000;
+    font-size: 11pt;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    font-size: 11pt;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    border-color: #33479c;
+    outline: none;
+    box-shadow: 0 0 5px rgba(51, 71, 156, 0.3);
+}
+
+.form-group small {
+    display: block;
+    margin-top: 5px;
+    color: #666;
+    font-size: 9pt;
+}
+
+/* Botones */
+.btn-primary, .btn-secondary {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    font-size: 11pt;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #33479c;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #ad9f77;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: #ddd;
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background-color: #bbb;
+}
+
+/* Información del usuario */
+.user-info {
+    background: #e8f0fe;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    border-left: 4px solid #33479c;
+}
+
+.user-info p {
+    margin: 5px 0;
+    font-size: 11pt;
+}
+
+/* Vista previa de firma */
+.signature-preview {
+    margin-top: 30px;
+    padding: 20px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.signature-preview h3 {
+    color: #33479c;
+    margin-bottom: 15px;
+}
+
+.signature-content {
+    border: 1px solid #ccc;
+    padding: 20px;
+    background: white;
+    margin-bottom: 20px;
+}
+
+.signature-actions {
+    text-align: center;
+}
+
+/* Estilos específicos para la firma */
+.nombre {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #000;
+    font-size: 11pt;
+}
+
+.cargo {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    color: #33479c;
+    font-size: 11pt;
+}
+
+.web {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: #33479c;
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+.legal {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-size: 9pt;
+    color: #000;
+    text-align: justify;
+    padding: 5pt;
+    margin-top: 15px;
+    border-top: 1px solid #ddd;
+}
+
+a:link {
+    color: #33479c;
+    font-size: 11pt;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ad9f77;
+    font-size: 11pt;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Mensajes de estado */
+.success-message, .error-message {
+    padding: 20px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.success-message {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.error-message {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.final-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Firma generada */
+.generated-signature {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border: 1px solid #ddd;
+    padding: 15px;
+    background: white;
+}
+
+.signature-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.signature-table td {
+    vertical-align: top;
+    padding: 5px;
+}
+
+.contact-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .form-container {
+        padding: 20px;
+    }
+    
+    header h1 {
+        font-size: 18pt;
+    }
+    
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        margin: 5px 0;
+    }
+}
+
+/* Loading spinner */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #33479c;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Firmas - INNOVATE NUTRITION S.A.S.</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="frontend/assets/images/logo-innovate.png" alt="INNOVATE NUTRITION" class="logo">
+            <h1>Generador de Firmas Corporativas</h1>
+        </header>
+
+        <!-- Pantalla 1: Validación de Identidad -->
+        <div id="screen1" class="screen active">
+            <div class="form-container">
+                <h2>Validación de Identidad</h2>
+                <p>Por favor ingrese sus datos corporativos para continuar:</p>
+                
+                <form id="identityForm">
+                    <div class="form-group">
+                        <label for="fullName">Nombre Completo:</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico Corporativo:</label>
+                        <input type="email" id="email" name="email" required>
+                        <small>Debe ser del dominio @innovatenutrition.com</small>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Validar y Enviar Token</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Pantalla 2: Validación del Token -->
+        <div id="screen2" class="screen">
+            <div class="form-container">
+                <h2>Verificación de Token</h2>
+                <p>Se ha enviado un token de verificación a su correo electrónico. Por favor ingréselo a continuación:</p>
+                
+                <div class="user-info">
+                    <p><strong>Usuario:</strong> <span id="displayName"></span></p>
+                    <p><strong>Correo:</strong> <span id="displayEmail"></span></p>
+                </div>
+                
+                <form id="tokenForm">
+                    <div class="form-group">
+                        <label for="token">Token de Verificación:</label>
+                        <input type="text" id="token" name="token" required maxlength="6" style="text-transform: uppercase;">
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Verificar Token</button>
+                    <button type="button" class="btn-secondary" onclick="goToScreen(1)">Volver</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Pantalla 3: Generación de Firma -->
+        <div id="screen3" class="screen">
+            <div class="form-container">
+                <h2>Generación de Firma Corporativa</h2>
+                
+                <div class="signature-form">
+                    <div class="form-group">
+                        <label for="position">Cargo/Posición:</label>
+                        <input type="text" id="position" name="position" placeholder="Ej: Gerente de Ventas" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Teléfono (opcional):</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Ej: +57 300 123 4567">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="mobile">Móvil (opcional):</label>
+                        <input type="tel" id="mobile" name="mobile" placeholder="Ej: +57 300 123 4567">
+                    </div>
+                    
+                    <button type="button" class="btn-primary" onclick="generateSignature()">Generar Firma</button>
+                </div>
+
+                <div id="signaturePreview" class="signature-preview" style="display: none;">
+                    <h3>Vista Previa de su Firma:</h3>
+                    <div id="signatureContent" class="signature-content"></div>
+                    
+                    <div class="signature-actions">
+                        <button type="button" class="btn-primary" onclick="downloadSignature()">Descargar como Imagen</button>
+                        <button type="button" class="btn-primary" onclick="sendSignatureByEmail()">Enviar por Correo</button>
+                        <button type="button" class="btn-secondary" onclick="goToScreen(4)">Finalizar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pantalla 4: Confirmación -->
+        <div id="screen4" class="screen">
+            <div class="form-container">
+                <h2>¡Proceso Completado!</h2>
+                <div class="success-message">
+                    <p>Su firma corporativa ha sido generada exitosamente.</p>
+                    <p>Si solicitó el envío por correo, recibirá las instrucciones para configurarla en Outlook y Thunderbird.</p>
+                </div>
+                
+                <div class="final-actions">
+                    <button type="button" class="btn-primary" onclick="startOver()">Generar Nueva Firma</button>
+                    <button type="button" class="btn-secondary" onclick="window.close()">Cerrar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pantalla de Rechazo -->
+        <div id="screenReject" class="screen">
+            <div class="form-container">
+                <h2>Acceso Denegado</h2>
+                <div class="error-message">
+                    <p>Lo sentimos, este generador de firmas está disponible únicamente para empleados de INNOVATE NUTRITION S.A.S.</p>
+                    <p>Su correo electrónico debe pertenecer al dominio <strong>@innovatenutrition.com</strong></p>
+                </div>
+                
+                <button type="button" class="btn-secondary" onclick="startOver()">Intentar de Nuevo</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
