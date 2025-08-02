@@ -12,7 +12,7 @@ let generatedToken = '';
 
 // Inicialización de EmailJS
 (function() {
-    emailjs.init("YOUR_PUBLIC_KEY"); // Reemplazar con la clave pública de EmailJS
+    emailjs.init("JW7-SUF3JLAKdaeOE"); // Reemplazar con la clave pública de EmailJS
 })();
 
 // Configuración SMTP simulada (en producción usar EmailJS o servicio backend)

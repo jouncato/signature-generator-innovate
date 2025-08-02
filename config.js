@@ -3,12 +3,12 @@
 
 const EMAIL_CONFIG = {
     // Configuración de EmailJS
-    publicKey: 'YOUR_EMAILJS_PUBLIC_KEY', // Reemplazar con su clave pública de EmailJS
-    serviceId: 'YOUR_EMAILJS_SERVICE_ID', // Reemplazar con su Service ID de EmailJS
+    publicKey: 'JW7-SUF3JLAKdaeOE', // Reemplazar con su clave pública de EmailJS
+    serviceId: 'service_zpafa0e_innovate', // Reemplazar con su Service ID de EmailJS
     
     // Templates de EmailJS
-    tokenTemplateId: 'template_token_verification', // Template para envío de token
-    signatureTemplateId: 'template_signature_delivery', // Template para envío de firma
+    tokenTemplateId: 'template_dyl9sju', // Template para envío de token
+    signatureTemplateId: 'template_dyl9sju', // Template para envío de firma
     
     // Configuración SMTP (información de referencia)
     smtp: {
