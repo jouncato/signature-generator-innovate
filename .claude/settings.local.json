@@ -10,11 +10,7 @@
       "Bash(mkdir:*)",
       "Bash(rm:*)",
       "Bash(ng build)",
-      "Bash(find:*)",
-      "Bash(start index.html)",
-      "Bash(explorer:*)",
-      "Bash(node:*)",
-      "Bash(del test.js)"
+      "Bash(find:*)"
     ],
     "deny": []
   }
