@@ -12,7 +12,7 @@ let generatedToken = '';
 
 // Inicialización de EmailJS
 (function() {
-    emailjs.init("JW7-SUF3JLAKdaeOE"); // Reemplazar con la clave pública de EmailJS
+    emailjs.init(EMAIL_CONFIG.publicKey);
 })();
 
 // Configuración SMTP simulada (en producción usar EmailJS o servicio backend)
@@ -49,7 +49,7 @@ function generateToken() {
 
 // Validar dominio de correo
 function isValidCorporateEmail(email) {
-    return email.toLowerCase().endsWith('@innovatenutrition.com');
+    return email.toLowerCase().endsWith(EMAIL_CONFIG.corporateDomain);
 }
 
 // Enviar token por correo
@@ -76,14 +76,15 @@ async function sendTokenByEmail(email, token, fullName) {
     };
 
     try {
-        // En producción, configurar EmailJS con el template correcto
-        await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams);
+        console.log('Enviando con:', EMAIL_CONFIG.serviceId, EMAIL_CONFIG.tokenTemplateId);
+        console.log('Template params:', templateParams);
+        await emailjs.send(EMAIL_CONFIG.serviceId, EMAIL_CONFIG.tokenTemplateId, templateParams);
         return true;
     } catch (error) {
         console.error('Error enviando correo:', error);
-        // Para demostración, simular envío exitoso
-        console.log('Token simulado enviado:', token);
-        return true;
+        console.error('Service ID usado:', EMAIL_CONFIG.serviceId);
+        console.error('Template ID usado:', EMAIL_CONFIG.tokenTemplateId);
+        return false;
     }
 }
 
@@ -294,15 +295,12 @@ async function sendSignatureByEmail() {
     };
     
     try {
-        // En producción, configurar EmailJS con el template para HTML
-        await emailjs.send('YOUR_SERVICE_ID', 'YOUR_HTML_TEMPLATE_ID', templateParams);
+        await emailjs.send(EMAIL_CONFIG.serviceId, EMAIL_CONFIG.signatureTemplateId, templateParams);
         alert('Firma enviada correctamente a su correo electrónico.');
         goToScreen(4);
     } catch (error) {
         console.error('Error enviando correo:', error);
-        // Para demostración
-        alert('Firma enviada correctamente a su correo electrónico (simulado).');
-        goToScreen(4);
+        alert('Error al enviar la firma por correo. Por favor intente nuevamente.');
     }
 }
 

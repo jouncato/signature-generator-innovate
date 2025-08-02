@@ -8,7 +8,7 @@ const EMAIL_CONFIG = {
     
     // Templates de EmailJS
     tokenTemplateId: 'template_dyl9sju', // Template para envío de token
-    signatureTemplateId: 'template_dyl9sju', // Template para envío de firma
+    signatureTemplateId: 'template_exws1wn', // Template para envío de firma
     
     // Configuración SMTP (información de referencia)
     smtp: {
