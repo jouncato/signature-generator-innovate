@@ -8,6 +8,8 @@ Aplicación web para generar firmas digitales corporativas con validación de ac
 signature-generator-innovate/
 ├── index.html                    # Página principal
 ├── package.json                  # Configuración del proyecto
+├── vercel.json                   # Configuración de Vercel
+├── .vercelignore                 # Archivos ignorados por Vercel
 ├── Dockerfile                    # Imagen Docker
 ├── docker-compose.yml            # Orquestación de contenedores
 ├── nginx.conf                    # Configuración del servidor web
@@ -26,7 +28,64 @@ signature-generator-innovate/
         └── utils/                # Utilidades
 ```
 
-## Despliegue
+## Despliegue en Vercel 🚀
+
+### Opción 1: Deploy Directo desde GitHub
+
+1. **Fork o clone el repositorio**
+2. **Conectar con Vercel**:
+   - Ve a [vercel.com](https://vercel.com)
+   - Conecta tu cuenta de GitHub
+   - Selecciona este repositorio
+   - Click en "Deploy"
+
+3. **Configuración automática**:
+   - Vercel detectará automáticamente que es un proyecto estático
+   - Usará la configuración de `vercel.json`
+   - La aplicación estará disponible en unos segundos
+
+### Opción 2: Deploy desde CLI de Vercel
+
+```bash
+# Instalar Vercel CLI
+npm i -g vercel
+
+# Login en Vercel
+vercel login
+
+# Deploy del proyecto
+vercel
+
+# Para deploy de producción
+vercel --prod
+```
+
+### Configuración de Vercel
+
+El archivo `vercel.json` incluye:
+- **Routing**: Redirección de todas las rutas a `index.html` (SPA)
+- **Build**: Configuración para archivos estáticos
+- **Static files**: Inclusión de assets y código fuente
+
+```json
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
+```
+
+## Otros Métodos de Despliegue
 
 ### Opción 1: Docker (Recomendado)
 
@@ -68,12 +127,14 @@ npx http-server . -p 8080
 ## Comandos Disponibles
 
 ```bash
-npm start          # Servidor HTTP en puerto 8080
-npm run dev        # Servidor con recarga automática
-npm run serve      # Servidor HTTP básico
-npm run docker:build    # Construir imagen Docker
-npm run docker:run      # Ejecutar contenedor
-npm run docker:compose  # Docker Compose
+npm start              # Servidor HTTP en puerto 8080
+npm run dev            # Servidor con recarga automática
+npm run build          # Construir para producción
+npm run vercel-build   # Build específico para Vercel
+npm run serve          # Servidor HTTP básico
+npm run docker:build  # Construir imagen Docker
+npm run docker:run     # Ejecutar contenedor
+npm run docker:compose # Docker Compose
 ```
 
 ## Configuración Docker

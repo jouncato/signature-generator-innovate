@@ -6,8 +6,9 @@
   "scripts": {
     "start": "npx http-server . -p 8080 -c-1",
     "dev": "npx live-server --port=3000 --no-browser",
-    "build": "echo 'No build step required for vanilla JS project'",
+    "build": "cp -r assets dist/ && cp -r src dist/ && cp index.html dist/",
     "serve": "npx http-server . -p 8080",
+    "vercel-build": "mkdir -p dist && cp -r assets dist/ && cp -r src dist/ && cp index.html dist/",
     "docker:build": "docker build -t signature-generator .",
     "docker:run": "docker run -p 8080:80 signature-generator",
     "docker:compose": "docker-compose up -d"
