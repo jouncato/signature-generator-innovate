@@ -1,0 +1,437 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+/* Header */
+header {
+    background: linear-gradient(135deg, #33479c 0%, #1a8b9d 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 24pt;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 12pt;
+    opacity: 0.9;
+}
+
+/* Pantallas */
+.screen {
+    display: none;
+    padding: 40px;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* Contenedor de formularios */
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-container h2 {
+    color: #33479c;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 20pt;
+}
+
+.form-container p {
+    margin-bottom: 20px;
+    line-height: 1.6;
+    color: #666;
+    text-align: center;
+}
+
+/* Grupos de formulario */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 14pt;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #33479c;
+    box-shadow: 0 0 0 3px rgba(51, 71, 156, 0.1);
+}
+
+/* Botones */
+.btn-primary,
+.btn-secondary {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14pt;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 5px;
+    font-family: inherit;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #33479c 0%, #1a8b9d 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(51, 71, 156, 0.3);
+}
+
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-secondary {
+    background: #f8f9fa;
+    color: #333;
+    border: 2px solid #ddd;
+}
+
+.btn-secondary:hover {
+    background: #e9ecef;
+    border-color: #bbb;
+}
+
+
+/* Formulario de validación */
+.validation-form {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 5px;
+    color: #6c757d;
+    font-size: 12pt;
+}
+
+/* Formulario de firma */
+.signature-form {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.form-group input:read-only {
+    background-color: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.form-actions .btn-primary,
+.form-actions .btn-secondary {
+    flex: 1;
+    margin: 0;
+}
+
+/* Vista previa de firma */
+.signature-preview {
+    background: white;
+    border: 2px solid #33479c;
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 30px;
+}
+
+.signature-preview h3 {
+    color: #33479c;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.signature-content {
+    background: white;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+}
+
+/* Estilos específicos para la firma generada */
+.signature-content table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.signature-content td {
+    vertical-align: top;
+    padding: 0;
+}
+
+.signature-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+.contact-icon {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+/* Colores específicos de la firma */
+.cargo, .web, a:link {
+    color: #33479c;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ad9f77;
+    text-decoration: none;
+}
+
+/* Acciones de firma */
+.signature-actions {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+
+/* Disclaimer */
+.disclaimer {
+    font-size: 8pt;
+    color: #666;
+    text-align: justify;
+    padding: 10px 0;
+    margin-top: 15px;
+    border-top: 1px solid #ddd;
+    line-height: 1.4;
+}
+
+/* Mensajes de estado */
+.success-message,
+.error-message {
+    padding: 20px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.success-message {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.error-message {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.final-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Pantalla de confirmación */
+.confirmation-container {
+    text-align: center;
+    padding: 40px;
+}
+
+.confirmation-container h2 {
+    color: #28a745;
+    margin-bottom: 20px;
+}
+
+.confirmation-container .success-icon {
+    font-size: 48pt;
+    color: #28a745;
+    margin-bottom: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
+        border-radius: 0;
+    }
+    
+    .screen {
+        padding: 20px;
+    }
+    
+    header {
+        padding: 20px;
+    }
+    
+    header h1 {
+        font-size: 18pt;
+    }
+    
+    .form-container {
+        padding: 0;
+    }
+    
+    .signature-form {
+        padding: 20px;
+    }
+    
+    .signature-preview {
+        padding: 20px;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    /* Ajustes para la firma en móvil */
+    .signature-content {
+        padding: 10px;
+        overflow-x: auto;
+    }
+    
+    .signature-content table {
+        min-width: 500px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px; /* Previene zoom en iOS */
+    }
+    
+    header h1 {
+        font-size: 16pt;
+    }
+    
+    .form-container h2 {
+        font-size: 16pt;
+    }
+}
+
+/* Loading spinner */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #33479c;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Animaciones suaves */
+.screen {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mejoras visuales */
+.form-container {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border-radius: 10px;
+    background: white;
+    padding: 40px;
+}
+
+/* Estilos para impresión */
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+    
+    .container {
+        box-shadow: none;
+        border-radius: 0;
+    }
+    
+    .screen:not(.active) {
+        display: none !important;
+    }
+    
+    .signature-actions,
+    .btn-primary,
+    .btn-secondary {
+        display: none !important;
+    }
+    
+    .signature-content {
+        border: none;
+        padding: 0;
+    }
+}

@@ -1,0 +1,40 @@
+{
+  "name": "signature-generator-innovate",
+  "version": "1.0.0",
+  "description": "Generador de firmas digitales para Innovate Nutrition",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server . -p 8080 -c-1",
+    "dev": "npx live-server --port=3000 --no-browser",
+    "build": "echo 'No build step required for vanilla JS project'",
+    "serve": "npx http-server . -p 8080",
+    "docker:build": "docker build -t signature-generator .",
+    "docker:run": "docker run -p 8080:80 signature-generator",
+    "docker:compose": "docker-compose up -d"
+  },
+  "keywords": [
+    "signature",
+    "generator",
+    "html",
+    "javascript",
+    "innovate-nutrition"
+  ],
+  "author": "Innovate Nutrition",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/innovate-nutrition/signature-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/innovate-nutrition/signature-generator/issues"
+  },
+  "homepage": "https://github.com/innovate-nutrition/signature-generator#readme"
+}

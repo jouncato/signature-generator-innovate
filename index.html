@@ -4,30 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generador de Firmas - INNOVATE NUTRITION S.A.S.</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="src/css/styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
     <div class="container">
         <header>
-            <img src="frontend/assets/images/logo-innovate.png" alt="INNOVATE NUTRITION" class="logo">
+            <img src="assets/images/logo-innovate.png" alt="INNOVATE NUTRITION" class="logo">
             <h1>Generador de Firmas Corporativas</h1>
         </header>
 
+        <!-- Validación de Acceso -->
+        <div id="accessValidation" class="screen active">
+            <div class="form-container">
+                <h2>Acceso al Generador de Firmas</h2>
+                <p>Por favor, complete los siguientes datos para acceder al generador de firmas corporativas:</p>
+                
+                <div class="validation-form">
+                    <div class="form-group">
+                        <label for="validateName">Nombre Completo:</label>
+                        <input type="text" id="validateName" name="validateName" placeholder="Ej: Juan Pérez" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="validateEmail">Correo Electrónico Corporativo:</label>
+                        <input type="email" id="validateEmail" name="validateEmail" placeholder="Ej: juan.perez@innovatenutrition.com" required>
+                        <small>Solo se permiten correos de @innovatenutrition.com</small>
+                    </div>
+                    
+                    <button type="button" class="btn-primary" onclick="validateAccess()">Continuar</button>
+                </div>
+            </div>
+        </div>
+
         <!-- Generación de Firma -->
-        <div id="signatureForm" class="screen active">
+        <div id="signatureForm" class="screen">
             <div class="form-container">
                 <h2>Generación de Firma Corporativa</h2>
                 
                 <div class="signature-form">
                     <div class="form-group">
                         <label for="fullName">Nombre Completo:</label>
-                        <input type="text" id="fullName" name="fullName" placeholder="Ej: Juan Pérez" required>
+                        <input type="text" id="fullName" name="fullName" placeholder="Ej: Juan Pérez" required readonly>
                     </div>
                     
                     <div class="form-group">
                         <label for="email">Correo Electrónico:</label>
-                        <input type="email" id="email" name="email" placeholder="Ej: juan.perez@innovatenutrition.com" required>
+                        <input type="email" id="email" name="email" placeholder="Ej: juan.perez@innovatenutrition.com" required readonly>
                     </div>
                     
                     <div class="form-group">
@@ -45,7 +68,10 @@
                         <input type="tel" id="mobile" name="mobile" placeholder="Ej: +57 300 123 4567">
                     </div>
                     
-                    <button type="button" class="btn-primary" onclick="generateSignature()">Generar Firma</button>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="goBackToValidation()">Volver</button>
+                        <button type="button" class="btn-primary" onclick="generateSignature()">Generar Firma</button>
+                    </div>
                 </div>
 
                 <div id="signaturePreview" class="signature-preview" style="display: none;">
@@ -61,7 +87,27 @@
         </div>
     </div>
 
-    <script src="config.js"></script>
-    <script src="script.js"></script>
+    <!-- Core Configuration -->
+    <script src="src/js/config.js"></script>
+    
+    <!-- Models -->
+    <script src="src/js/models/user-model.js"></script>
+    
+    <!-- Services -->
+    <script src="src/js/services/signature-service.js"></script>
+    <script src="src/js/services/download-service.js"></script>
+    
+    <!-- Controllers -->
+    <script src="src/js/controllers/navigation-controller.js"></script>
+    
+    <!-- Validators -->
+    <script src="src/js/validators/email-validator.js"></script>
+    
+    <!-- Utilities -->
+    <script src="src/js/utils/form-utils.js"></script>
+    <script src="src/js/utils/message-utils.js"></script>
+    
+    <!-- Main Application -->
+    <script src="src/js/signature-app.js"></script>
 </body>
 </html>
