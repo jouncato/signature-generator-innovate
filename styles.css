@@ -142,23 +142,6 @@ header p {
     border-color: #bbb;
 }
 
-/* Información del usuario */
-.user-info {
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 6px;
-    margin: 20px 0;
-    border-left: 4px solid #33479c;
-}
-
-.user-info p {
-    margin: 10px 0;
-    text-align: left;
-}
-
-.user-info strong {
-    color: #33479c;
-}
 
 /* Formulario de firma */
 .signature-form {
@@ -233,20 +216,6 @@ a:hover {
     border-top: 1px solid #ddd;
 }
 
-/* Pantalla de rechazo */
-.reject-container {
-    text-align: center;
-    color: #721c24;
-    background: #f8d7da;
-    padding: 30px;
-    border-radius: 10px;
-    border: 1px solid #f5c6cb;
-}
-
-.reject-container h2 {
-    color: #721c24;
-    margin-bottom: 20px;
-}
 
 /* Disclaimer */
 .disclaimer {
