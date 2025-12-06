@@ -1,17 +1,13 @@
-# Dockerfile para Generador de Firmas - Innovate Nutrition
-FROM nginx:alpine
+FROM node:18-alpine
 
-# Remover configuración por defecto de nginx
-RUN rm -rf /usr/share/nginx/html/*
+WORKDIR /app
 
-# Copiar archivos de la aplicación
-COPY . /usr/share/nginx/html/
+COPY index.html .
+COPY assets ./assets
+COPY src ./src
 
-# Copiar configuración personalizada de nginx
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+RUN npm install -g http-server
 
-# Exponer puerto 80
-EXPOSE 81
+EXPOSE 8090
 
-# Comando para iniciar nginx
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["http-server", ".", "-p", "8090", "-c-1"]
