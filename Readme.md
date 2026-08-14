@@ -2,17 +2,17 @@
 
 Aplicación web para generar firmas digitales corporativas con validación de acceso.
 
+**URL de producción:** https://signature-generator-innovate.up.railway.app
+
 ## Estructura del Proyecto
 
 ```
 signature-generator-innovate/
 ├── index.html                    # Página principal
 ├── package.json                  # Configuración del proyecto
-├── vercel.json                   # Configuración de Vercel
-├── .vercelignore                 # Archivos ignorados por Vercel
-├── Dockerfile                    # Imagen Docker
-├── docker-compose.yml            # Orquestación de contenedores
-├── nginx.conf                    # Configuración del servidor web
+├── Dockerfile                    # Imagen Docker (Railway)
+├── docker-compose.yml            # Orquestación de contenedores (local)
+├── nginx.conf                    # Configuración del servidor web (local)
 ├── assets/
 │   └── images/                   # Recursos gráficos
 └── src/
@@ -28,80 +28,72 @@ signature-generator-innovate/
         └── utils/                # Utilidades
 ```
 
-## Despliegue en Vercel 🚀
+## Despliegue en Railway 🚀
 
-### Opción 1: Deploy Directo desde GitHub
+La aplicación está desplegada en Railway mediante el `Dockerfile` del repositorio.
 
-1. **Fork o clone el repositorio**
-2. **Conectar con Vercel**:
-   - Ve a [vercel.com](https://vercel.com)
-   - Conecta tu cuenta de GitHub
-   - Selecciona este repositorio
-   - Click en "Deploy"
+**URL:** https://signature-generator-innovate.up.railway.app
 
-3. **Configuración automática**:
-   - Vercel detectará automáticamente que es un proyecto estático
-   - Usará la configuración de `vercel.json`
-   - La aplicación estará disponible en unos segundos
-
-### Opción 2: Deploy desde CLI de Vercel
+### Opción 1: Deploy desde CLI de Railway
 
 ```bash
-# Instalar Vercel CLI
-npm i -g vercel
+# Instalar Railway CLI
+npm i -g @railway/cli
 
-# Login en Vercel
-vercel login
+# Login en Railway
+railway login
 
-# Deploy del proyecto
-vercel
+# Crear proyecto y vincular el directorio
+railway init --name signature-generator
 
-# Para deploy de producción
-vercel --prod
+# Desplegar
+railway up --detach
+
+# Generar dominio público
+railway domain
 ```
 
-### Configuración de Vercel
+### Opción 2: Deploy desde GitHub (automático)
 
-El archivo `vercel.json` incluye:
-- **Routing**: Redirección de todas las rutas a `index.html` (SPA)
-- **Build**: Configuración para archivos estáticos
-- **Static files**: Inclusión de assets y código fuente
+1. Conecta tu repositorio de GitHub en [railway.com](https://railway.com)
+2. Selecciona este repositorio
+3. Railway detectará automáticamente el `Dockerfile` y lo construirá
+4. Genera un dominio desde el panel de Railway
 
-```json
-{
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ]
-}
-```
+### Configuración del Dockerfile
+
+El `Dockerfile` usa `http-server` para servir los archivos estáticos:
+- **Variable `PORT`**: Railway inyecta el puerto automáticamente (fallback a 8090 local)
+- **Bind `0.0.0.0`**: El contenedor es alcanzable desde fuera
+- **Sin caché**: `c-1` para desarrollo; los headers de caché se manejan en `vercel.json`/`nginx.conf`
 
 ## Otros Métodos de Despliegue
 
-### Opción 1: Docker (Recomendado)
+### Opción 1: Docker Local
 
 ```bash
 # Clonar repositorio
 git clone <repository-url>
 cd signature-generator-innovate
 
-# Ejecutar con Docker Compose
+# Construir y ejecutar con Docker
+docker build -t signature-generator .
+docker run -p 8090:8090 signature-generator
+
+# Acceder a la aplicación
+http://localhost:8090
+```
+
+### Opción 2: Docker Compose
+
+```bash
 docker-compose up -d
 
 # Acceder a la aplicación
 http://localhost:8080
 ```
 
-### Opción 2: Node.js Local
+### Opción 3: Node.js Local
 
 ```bash
 # Instalar dependencias
@@ -114,7 +106,7 @@ npm start
 http://localhost:8080
 ```
 
-### Opción 3: Servidor Web Simple
+### Opción 4: Servidor Web Simple
 
 ```bash
 # Python 3
@@ -130,9 +122,8 @@ npx http-server . -p 8080
 npm start              # Servidor HTTP en puerto 8080
 npm run dev            # Servidor con recarga automática
 npm run build          # Construir para producción
-npm run vercel-build   # Build específico para Vercel
 npm run serve          # Servidor HTTP básico
-npm run docker:build  # Construir imagen Docker
+npm run docker:build   # Construir imagen Docker
 npm run docker:run     # Ejecutar contenedor
 npm run docker:compose # Docker Compose
 ```
@@ -141,24 +132,22 @@ npm run docker:compose # Docker Compose
 
 ### Variables de Entorno
 
-```yaml
-environment:
-  - NGINX_HOST=localhost
-  - NGINX_PORT=80
-```
+| Variable | Descripción | Default |
+|----------|-------------|---------|
+| `PORT`   | Puerto del servidor (inyectado por Railway) | `8090` |
 
 ### Puertos
 
-- **8080**: Puerto de la aplicación web
-- **80**: Puerto interno del contenedor
-
-### Volúmenes
-
-- `./nginx.conf`: Configuración personalizada de Nginx
+- **8090**: Puerto de la aplicación (configurable via `PORT`)
+- **8080**: Puerto mapeado por `docker-compose.yml`
 
 ## Producción
 
-Para despliegue en producción:
+El despliegue de producción se realiza en Railway:
+
+**https://signature-generator-innovate.up.railway.app**
+
+Para despliegue manual con Docker:
 
 1. **Construir imagen**:
    ```bash
@@ -167,7 +156,7 @@ Para despliegue en producción:
 
 2. **Ejecutar contenedor**:
    ```bash
-   docker run -d -p 80:80 --name signature-app signature-generator:latest
+   docker run -d -p 80:8090 --name signature-app signature-generator:latest
    ```
 
 3. **Con proxy reverso** (Nginx/Traefik):
@@ -179,8 +168,8 @@ Para despliegue en producción:
 
 ## Requisitos del Sistema
 
-- **Docker**: 20.10+
-- **Docker Compose**: 3.8+
+- **Docker**: 20.10+ (para despliegue local/producción manual)
+- **Docker Compose**: 3.8+ (opcional, para orquestación local)
 - **Node.js**: 14+ (para desarrollo local)
 - **Navegador**: Chrome, Firefox, Safari, Edge
 
