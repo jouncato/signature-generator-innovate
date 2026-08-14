@@ -8,6 +8,9 @@ COPY src ./src
 
 RUN npm install -g http-server
 
+# Railway inyecta la variable PORT; fallback a 8090 para uso local
+ENV PORT=8090
 EXPOSE 8090
 
-CMD ["http-server", ".", "-p", "8090", "-c-1"]
+# Shell form para que $PORT se expanda en runtime
+CMD http-server . -p ${PORT} -a 0.0.0.0 -c-1
